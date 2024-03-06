@@ -52,7 +52,7 @@
             <div class="sections">
                 <div class="section-top">
                     <div class="sectionphoto">
-                        <img src="img/monster-icons/SVG/kidaha-01.svg" alt="顯示錯誤">						  
+                        <img src="img/member/0.svg" alt="顯示錯誤">						  
                     </div>
                     <div class="section-side">
                        
