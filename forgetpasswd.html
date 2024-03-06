@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style-forgetpasswd.css">
+    <title>忘記密碼</title>
+
+    <style>
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+	<script>
+		
+		function refreshImage() {
+		  var image = document.getElementById("randimg");
+		  image.src = "createImage_temp.jsp?" + new Date().getTime(); // 添加时间戳，确保每次都是新的URL
+		  return false;
+		}
+        var xmlHTTP;
+	  	var str;
+	  	var checkOK=true;
+	  	function addListener(){
+			document.getElementById("passwdcheck").addEventListener("keyup",function(event){
+	            if(event.key ==="Enter"){
+	                changepasswd();
+	            }
+			});
+			return false;
+		  }
+        function check(){
+			checkOK=true;
+            var regex_name=/^[A-Za-z0-9]{6,12}$/;
+            var regex_email=/(^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$)|([0][9][0-9]{8})/;
+            var username=document.login.username.value;
+            var email=document.login.email.value;
+            var rand = document.login.rand.value;
+            
+            if(username.length==0){
+                alert("請輸入帳號");
+                document.login.username.focus();
+                checkOK=false;
+            }else{
+                if(!regex_name.test(username)){
+                    alert("帳號格式錯誤");
+                    checkOK=false;
+                }
+            }
+            
+            if(email.length==0){
+				alert("請輸入手機或email");
+				document.login.email.focus();
+				checkOK=false;
+			}else{
+				if(!regex_email.test(email)){
+					alert("手機/email格式錯誤");
+					checkOK=false;
+				}
+			}
+			if(rand.length==0){
+				alert("請輸入驗證碼");
+					checkOK=false;
+			}
+           
+
+            if(window.ActiveXObject)
+            {
+                xmlHTTP=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            else if(window.XMLHttpRequest)
+            {
+                xmlHTTP=new XMLHttpRequest();
+            }
+        
+            xmlHTTP.open("POST","http://localhost:8080/gym/forget", true);
+        
+            xmlHTTP.onreadystatechange=function get_data()
+            {
+                if(xmlHTTP.status == 200)
+                {
+                    if(xmlHTTP.readyState == 4)
+                    {
+                        str=xmlHTTP.responseText;
+                        if(str=="帳號不存在" || str=="手機或信箱錯誤"||str=="驗證碼輸入錯誤"){
+							document.getElementById("message").innerHTML="<span style='color:red' id='message'>"+str+"</span>";
+                            refreshImage();
+                        }
+                        else{
+                            
+                            document.getElementById("login-text").innerHTML="<p><span>新&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;碼:</span><input type='password' name='passwd' id='passwd' size='25' maxlength='15'></p>"+
+                            "<p><span>再次確認密碼:</span><input type='password'name='passwdcheck' id='passwdcheck' size='25' maxlength='15'></p>";
+                            document.getElementById("message").innerHTML="<span id='message'></span>";
+                            document.getElementById("check-btn").outerHTML="<input  id='check-btn' type='button' value='送出' onclick='changepasswd()'>"
+                            addListener();
+                        }
+
+                    }
+                }
+            }
+            var data;
+            var json;
+            if(checkOK){
+                data={
+					"username":username,
+					"email":email,
+					"rand":rand
+				}
+				json=JSON.stringify(data);
+                xmlHTTP.send(json);
+            }else{
+                document.login.reset();
+                document.login.username.focus();
+                document.getElementById("message").innerHTML="<span id='message'></span>";
+            }
+            return false;
+       	};
+       	
+        function changepasswd(){
+			var regex_passwd=/^[A-Za-z0-9]{8,12}$/;
+			var passwd = document.getElementById("passwd").value;
+			var passwdcheck = document.getElementById("passwdcheck").value;
+			var data;
+			var json;
+			
+			if(passwd.length==0||passwdcheck.length==0){
+				alert("請輸入密碼");
+				checkOK=false;
+			}else{
+				if(!regex_passwd.test(passwd)){
+					alert("密碼格式錯誤");
+					checkOK=false;
+				}
+			}
+			if(passwd!=passwdcheck){
+				alert("兩次輸入密碼不同");
+				checkOK=false;
+			}else{
+				data={
+					"passwd":passwd
+				}
+				json=JSON.stringify(data);
+			}
+			
+			
+			if(window.ActiveXObject)
+            {
+                xmlHTTP=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            else if(window.XMLHttpRequest)
+            {
+                xmlHTTP=new XMLHttpRequest();
+            }
+        
+            xmlHTTP.open("POST","http://localhost:8080/gym/newpasswd" , true);
+        
+            xmlHTTP.onreadystatechange=function get_data()
+            {
+                if(xmlHTTP.status == 200)
+                {
+                    if(xmlHTTP.readyState == 4)
+                    {
+          
+						window.location.href = "/gym/login.html";
+                    }
+                }
+            }
+            if(checkOK){
+                xmlHTTP.send(json);
+            }
+            return false;
+        };
+    </script>
+</head>
+<body>
+    <div class="bg">
+        <div class="header">
+            <div class="header-left">
+                <div class="header-left-img">
+                    <img src="img/icons4.png" alt="顯示異常" style="width: 100%;">
+                </div>
+                <div class="header-left-text">
+                    <a href="index.html">健身鐵工廠</a>
+                </div>
+            </div>  
+            <div class="header-right">
+                <div class="header-right-img">
+                    <img src="img/icons6.png" alt="">
+                </div>
+                <div class="header-right-text">
+                    <a href="register.jsp">註冊會員</a>
+                </div>
+            </div>  
+        </div>
+        <div class="article">
+            <div class="loginwindow">
+                <form action="/gym/forget" method="post" name="login">
+                    <div class="loginwindow-top">
+                        忘記密碼
+                    </div>
+                    <div class="login-text" id="login-text">                    
+                    	<p><span>帳&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;號：</span><input type="text" name="username" id="username" size="25" maxlength="15"></p>
+                    	<p><span>手機/信箱：</span><input type="text" name="email" id="email" size="25"></p>                    	
+                    	<p><span>驗&nbsp;&nbsp;&nbsp;證&nbsp;&nbsp;&nbsp;碼：</span><input type='text' name='rand' id='rand' size='6' maxlength="4">&nbsp;&nbsp;&nbsp;<img src="createImage_temp.jsp" alt="Random_Number" id='randimg'/>&nbsp;&nbsp;&nbsp;<input  type="button" value="換一張" onclick="refreshImage()"></p>
+                    </div>
+                    <input  id='check-btn' type="button" value="送出" onclick="check()">
+                    <span id="message"></span>
+                </form>            
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("rand").addEventListener("keyup",function(event){
+            if(event.key ==="Enter"){
+                check();
+            }
+        });
+
+    </script>
+</body>
+</html>

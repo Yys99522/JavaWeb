@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head style="height: 150%;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style-index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap-5.3.1/css/bootstrap.min.css">
+    <script src="js/bootstrap-5.3.1-dist/js/bootstrap.min.js"></script>
+    <title>首頁</title>
+</head>
+<body onload="checkOnline()">
+    <div class="sheld" style="height: 100%;">
+        <div class="header">
+                <div class="header-left">
+                    <div class="header-left-img">
+                        <img src="img/icons4.png" alt="顯示異常" style="width: 100%;">
+                    </div>
+                    <div class="header-left-text">
+                        <a  href="index.html">健身鐵工廠</a>
+                    </div>
+                </div>  
+                <div class="header-right">
+                    <div class="header-right-img">
+                        <img id="member-icon" src="img/icons1.png" alt="" width="24px" height="28px" id="member" style="visibility: hidden;">
+                    </div>
+                    <div class="header-right-text">
+                        <a id="member-link" href="memberwindow.jsp" aria-disabled="true" style="visibility: hidden;">會員中心</a>
+                    </div>
+                    <div class="header-right-img">
+                        <img src="img/icons6.png" alt="">
+                    </div>
+                    <div class="header-right-text">
+                        <a id="login-link" href="login.html">會員登入</a>
+                    </div>
+                </div>  
+        </div>
+        <div class="navbar">
+            <div class="navbar1">公開課</div>
+            <div class="navbar2"><a id="link" href="menu.jsp">私教課程</a></div>
+            <div class="navbar3">預約體驗</div>
+        </div>
+        <div class="article">
+            <div class="article-img"></div>
+            <div class="article-covertext">
+                Persistence Is Your Superpower
+            </div>
+            <div class="article-textbox">
+                <div class="article-text">persistence</div>
+                <div class="article-text">is</div>
+                <div class="article-text">your</div>
+                <div class="article-text">superpower</div>
+            </div>
+        </div>
+        <div class="block-info flex">
+            <!--公告放置區-->
+        </div>
+        <div class="block1 flex">
+            <div class="block1-left">
+                <span>有氧運動，英文稱為（Aerobic Exercise），而有氧的意思就是指需要大量氧氣的供應下進行的體育鍛煉，這種類型的運動強度較低且富規律性。當我們進行有氧運動時，我們的心跳需要達到最大心跳率的60%~80%，且持續20分鐘或以上，這樣才算是有效的有氧運動。</span>
+            </div>
+            <div class="block1-right"><img class="block-img" src="img/block1-1.jpg" alt="..."></div>
+        </div>
+        <div class="block2 flex">
+            <div class="block2-left"><img class="block-img" src="img/indexbg.jpg" alt=""></div>
+            <div class="block2-right">
+                無氧運動，英文稱為（Anaerobic Exercise），無氧的意思是指人體肌肉在無氧氣供能代謝狀態下進行的運動。這種類型的運動大部分是負荷強度高、爆發力且瞬間性強的運動，持續時間較短，疲勞消除的時間也慢。
+            </div>
+        </div>
+        <div class="block-final flex">
+            <div class="block-final-top"><img src="img/block-final2.jpg" alt=""></div>
+            <div class="block-final-bottom">
+                高强度間歇訓練，英文稱為（High Intensity Interval Training，簡稱HIIT），這種運動是结合了有氧運動和無氧運動，這種運動是透過高耗能量的運動再加上短暫歇息的方式來消耗熱量，减低脂肪率。
+            </div>
+        </div>
+        <footer class="footer">
+            <p>健身鐵工廠</p>
+            <div class="social-icons">
+                <a href="#" target="_blank">加入我們<i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank">機不可失<i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank">失不再來<i class="fab fa-instagram"></i></a>
+            </div>
+        </footer>
+    </div>
+</body>
+<script>
+    function checkOnline(){
+        var membericon=document.getElementById("member-icon");
+        var memberlink=document.getElementById("member-link");
+
+        if (sessionStorage.getItem("online")=='1'){
+                document.getElementById("login-link").outerHTML="<a id='login-link' href='index.html' onclick='logout()'>登出</a>";
+                membericon.style.visibility= "visible";
+                memberlink.style.visibility= "visible";
+        }else{
+                document.getElementById("login-link").outerHTML="<a id='login-link' href='login.html'>會員登入</a>";
+                membericon.style.visibility= "hidden";
+                emberlink.style.visibility= "hidden";
+        }
+    }
+    function logout(){
+        sessionStorage.setItem("online","0");
+        membericon.style.visibility= "hidden";
+        emberlink.style.visibility= "hidden";
+    }
+</script>
+</html>
