@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.checkout {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.checkout h2 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.checkout ul {
+    list-style: none;
+    padding: 0;
+}
+
+.checkout ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.checkout ul li img {
+    max-width: 100px;
+    margin-right: 20px;
+}
+
+.checkout ul li span {
+    flex: 1;
+    font-size: 18px;
+}
+
+/* 只選擇id下的li元素 */
+#orderlist>li:nth-child(old){
+    background-color:azure;
+}
+#orderlist>li:nth-child(even){
+    background-color:whitesmoke;
+}
+
+#totalCost {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+form{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+form label {
+    font-size: 16px;
+    display: block;
+    margin-top: 10px;
+}
+
+form input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form ul{
+    display: flex;
+    justify-content: space-around;
+}
+
+.payButton {
+    display: block; /* 设置为块级元素 */
+    margin-top: 10px; /* 可以根据需要调整按钮与其他元素之间的垂直间距 */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.payButton:hover {
+    background-color: #0056b3;
+}

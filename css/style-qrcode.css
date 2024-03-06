@@ -1,0 +1,33 @@
+.qr-order {
+    text-align: center;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.qr-order h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.order-details {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.order-details p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+img {
+    max-width: 100%;
+    margin-top: 10px;
+}

@@ -1,0 +1,11 @@
+.sectiontext{
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    margin-left: 5px;
+    margin-right: auto;
+}
+P{
+    margin-bottom: 8px;
+}
